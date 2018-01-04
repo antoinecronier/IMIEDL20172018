@@ -20,38 +20,85 @@ namespace IMIEDL20172018
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<String> imageAdress = new List<string>() { "https://www.google.com/images/nav_logo229.png","https://www.3ders.org/images/slug-traq-3d-printed-test-1.png", "https://s3-us-west-1.amazonaws.com/powr/defaults/Siberian-Tiger-Running-Through-Snow-Tom-Brakefield-Getty-Images-200353826-001.jpg" };
+        private MoreAndLess mAl;
+        private bool retry = false;
+        private String played = "";
 
         public MainWindow()
         {
             InitializeComponent();
+            mAl = new MoreAndLess();
+            InitEvents();
+            this.passedValues.Text = played;
 
-            this.webbrowser.Navigate("https://github.com/antoinecronier/IMIEDL20172018");
-            this.combobox.ItemsSource = new List<String>() {"Item1","Item2","Item3"};
-            this.sGLabel.Content = "new label from C#";
-            this.sGTextBox.FontStyle = FontStyles.Italic;
-            this.sGTextBox.AcceptsReturn = true;
-            this.checkbox.Checked += Checkbox_Checked;
-            this.checkbox.Unchecked += Checkbox_Unchecked;
-            this.slider.Maximum = 2;
-            this.slider.ValueChanged += Slider_ValueChanged;
-            this.image.Source = new BitmapImage(new Uri("https://www.google.com/images/nav_logo229.png"));
+            this.toFind.MouseDoubleClick += ToFind_MouseDoubleClick;
         }
 
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void InitEvents()
         {
-            int val = Int32.Parse(this.slider.Value.ToString());
-            this.image.Source = new BitmapImage(new Uri(imageAdress.ToArray()[val]));
+            mAl.Less += MAl_Less;
+            mAl.More += MAl_More;
+            mAl.Founded += MAl_Founded;
+            mAl.Loose += MAl_Loose;
         }
 
-        private void Checkbox_Unchecked(object sender, RoutedEventArgs e)
+        private void ToFind_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this.mainGrid.Background = new SolidColorBrush(Color.FromRgb(200, 10, 100));
+            if (retry)
+            {
+                this.toFind.Content = "?";
+                this.mAl = new MoreAndLess();
+                InitEvents();
+                retry = false;
+                played = "";
+                this.passedValues.Text = played;
+            }
+
+            int result;
+
+            if (Int32.TryParse(this.userInput.Text, out result))
+            {
+                played += " " + this.userInput.Text;
+                this.passedValues.Text = played;
+                mAl.PlayWPF(result);
+            }
+            else
+            {
+                this.toFind.Background = new SolidColorBrush(Color.FromRgb(10,10,100));
+            }  
         }
 
-        private void Checkbox_Checked(object sender, RoutedEventArgs e)
+        private void MAl_Loose(object sender, EventArgs e)
         {
-            this.mainGrid.Background = new SolidColorBrush(Color.FromRgb(10, 200, 100));
+            this.toFind.Content = "You have loose";
+            this.toFind.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            this.more.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            this.less.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+
+            retry = true;
+        }
+
+        private void MAl_Founded(object sender, EventArgs e)
+        {
+            this.toFind.Content = "You WIN";
+            this.more.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            this.less.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+
+            retry = true;
+        }
+
+        private void MAl_More(object sender, EventArgs e)
+        {
+            this.more.Background = new SolidColorBrush(Color.FromRgb(200, 10, 10));
+            this.less.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            this.toFind.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+        }
+
+        private void MAl_Less(object sender, EventArgs e)
+        {
+            this.less.Background = new SolidColorBrush(Color.FromRgb(200, 10, 10));
+            this.more.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            this.toFind.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
         }
     }
 }
