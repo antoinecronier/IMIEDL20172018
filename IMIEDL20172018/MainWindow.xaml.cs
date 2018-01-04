@@ -27,11 +27,20 @@ namespace IMIEDL20172018
         public MainWindow()
         {
             InitializeComponent();
+            this.userInput.KeyUp += UserInput_KeyUp;
             mAl = new MoreAndLess();
             InitEvents();
             this.passedValues.Text = played;
 
             this.toFind.MouseDoubleClick += ToFind_MouseDoubleClick;
+        }
+
+        private void UserInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key.Equals(Key.Enter))
+            {
+                DoMoreAndLess();
+            }
         }
 
         private void InitEvents()
@@ -43,6 +52,11 @@ namespace IMIEDL20172018
         }
 
         private void ToFind_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DoMoreAndLess();
+        }
+
+        private void DoMoreAndLess()
         {
             if (retry)
             {
@@ -64,8 +78,8 @@ namespace IMIEDL20172018
             }
             else
             {
-                this.toFind.Background = new SolidColorBrush(Color.FromRgb(10,10,100));
-            }  
+                this.toFind.Background = new SolidColorBrush(Color.FromRgb(10, 10, 100));
+            }
         }
 
         private void MAl_Loose(object sender, EventArgs e)
