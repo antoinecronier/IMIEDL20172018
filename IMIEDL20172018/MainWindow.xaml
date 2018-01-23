@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IMIEDL20172018"
+        xmlns:uc="clr-namespace:IMIEDL20172018.UserControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
     <Grid Name="mainGrid">
@@ -47,5 +48,7 @@
         <Viewbox Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="6">
             <TextBlock Name="passedValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Viewbox>
+
+        <uc:ClientUserControl x:Name="ClientUC" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="6"/>
     </Grid>
 </Window>

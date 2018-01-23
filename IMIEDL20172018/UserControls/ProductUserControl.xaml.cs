@@ -1,5 +1,4 @@
-﻿using IMIEDL20172018.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,20 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IMIEDL20172018
+namespace IMIEDL20172018.UserControls
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour ProductUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProductUserControl : UserControl
     {
-        public MainWindow()
+        public ProductUserControl()
         {
             InitializeComponent();
-            Client c1 = new Client();
-            c1.Firstname = "toto";
-            c1.Lastname = "tata";
-            ClientUC.CurrentClient = c1;
         }
     }
 }
