@@ -65,6 +65,13 @@ namespace IMIEDL20172018.Models
         {
 
         }
+
+        public Client(string firstname, string lastname, double money)
+        {
+            this.firstname = firstname;
+            this.lastname = lastname;
+            this.money = money;
+        }
         #endregion
 
         #region StaticFunctions

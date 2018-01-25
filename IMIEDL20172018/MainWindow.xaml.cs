@@ -2,6 +2,7 @@
 using IMIEDL20172018.Views;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,30 +21,79 @@ namespace IMIEDL20172018
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+
+        #region Singleton
+        private static MainWindow instance;
+
         public MainWindow()
         {
-            InitializeComponent();
-            Client c1 = new Client();
-            c1.Firstname = "toto";
-            c1.Lastname = "tata";
-            c1.Money = 100;
-            ClientUC.CurrentClient = c1;
-
-            Task.Factory.StartNew(() =>
-            {
-                Client client = new Client();
-                client.Firstname = "coucou";
-                ClientUC.CurrentClient = client;
-            });
-
-            btnNavigate.Click += BtnNavigate_Click;
+            this.DataContext = this;
+            this.CurrentPage = new Page1();
+            instance = this;
         }
 
-        private void BtnNavigate_Click(object sender, RoutedEventArgs e)
+        public static MainWindow Instance
         {
-            this.Content = new Page1();
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new MainWindow();
+                }
+                return instance;
+            }
         }
+        #endregion
+        
+        #region StaticVariables
+        #endregion
+
+        #region Constants
+        #endregion
+
+        #region Variables
+        #endregion
+
+        #region Attributs
+        private Page currentPage;
+
+        public Page CurrentPage
+        {
+            get { return currentPage; }
+            set {
+                currentPage = value;
+                OnPropertyChanged("CurrentPage");
+            }
+        }
+
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Constructors
+        #endregion
+
+        #region StaticFunctions
+        #endregion
+
+        #region Functions
+        #endregion
+
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        #endregion
+
     }
 }

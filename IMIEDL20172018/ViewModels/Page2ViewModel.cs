@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using IMIEDL20172018.Views;
+using System.Collections.Generic;
 using IMIEDL20172018.Models;
 
 namespace IMIEDL20172018.ViewModels
 {
-    public class Page1ViewModel
+    internal class Page2ViewModel
     {
+
         #region StaticVariables
         #endregion
 
@@ -17,7 +15,7 @@ namespace IMIEDL20172018.ViewModels
         #endregion
 
         #region Variables
-        private Page1 page1;
+        private Page2 page2;
         #endregion
 
         #region Attributs
@@ -27,9 +25,9 @@ namespace IMIEDL20172018.ViewModels
         #endregion
 
         #region Constructors
-        public Page1ViewModel(Page1 page1)
+        public Page2ViewModel(Page2 page2)
         {
-            this.page1 = page1;
+            this.page2 = page2;
             Init();
             Events();
         }
@@ -39,24 +37,26 @@ namespace IMIEDL20172018.ViewModels
         #endregion
 
         #region Functions
-        private void Init()
-        {
-            Client client = new Client();
-            client.Firstname = "antoine";
-            client.Lastname = "cronier";
-            client.Money = 1000000;
-
-            this.page1.ClientUC.CurrentClient = client;
-        }
 
         private void Events()
         {
-            this.page1.btnNavigate.Click += BtnNavigate_Click;
+            this.page2.btnNavigate.Click += BtnNavigate_Click;
         }
 
         private void BtnNavigate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            MainWindow.Instance.CurrentPage = new Page2();
+            MainWindow.Instance.CurrentPage = new Page1();
+        }
+
+        private void Init()
+        {
+            List<Client> clients = new List<Client>();
+            for (int i = 0; i < 200; i++)
+            {
+                clients.Add(new Client("fn" + i, "ln" + i, i * i));
+            }
+            
+            this.page2.ClientListUC.LoadItems(clients);
         }
         #endregion
 
