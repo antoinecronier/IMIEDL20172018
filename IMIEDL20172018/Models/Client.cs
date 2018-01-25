@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace IMIEDL20172018.Models
 {
-    public class Client
+    public class Client : INotifyPropertyChanged
     {
         #region StaticVariables
         #endregion
@@ -28,19 +29,28 @@ namespace IMIEDL20172018.Models
         public String Firstname
         {
             get { return firstname; }
-            set { firstname = value; }
+            set {
+                firstname = value;
+                OnPropertyChanged("Firstname");
+            }
         }
 
         public String Lastname
         {
             get { return lastname; }
-            set { lastname = value; }
+            set {
+                lastname = value;
+                OnPropertyChanged("Lastname");
+            }
         }
 
         public Double Money
         {
             get { return money; }
-            set { money = value; }
+            set {
+                money = value;
+                OnPropertyChanged("Money");
+            }
         }
 
         public List<Product> Bag
@@ -64,8 +74,17 @@ namespace IMIEDL20172018.Models
         #endregion
 
         #region Events
-        #endregion
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        public void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        #endregion
 
     }
 }

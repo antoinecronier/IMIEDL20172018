@@ -1,6 +1,7 @@
 ﻿using IMIEDL20172018.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace IMIEDL20172018.UserControls
     /// <summary>
     /// Logique d'interaction pour ClientUserControl.xaml
     /// </summary>
-    public partial class ClientUserControl : UserControl
+    public partial class ClientUserControl : UserControl, INotifyPropertyChanged
     {
 
         #region StaticVariables
@@ -39,7 +40,10 @@ namespace IMIEDL20172018.UserControls
         public Client CurrentClient
         {
             get { return currentClient; }
-            set { currentClient = value; }
+            set {
+                currentClient = value;
+                OnPropertyChanged("CurrentClient");
+            }
         }
         #endregion
 
@@ -58,6 +62,16 @@ namespace IMIEDL20172018.UserControls
         #endregion
 
         #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
         #endregion
     }
 }

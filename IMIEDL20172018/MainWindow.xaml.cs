@@ -27,7 +27,16 @@ namespace IMIEDL20172018
             Client c1 = new Client();
             c1.Firstname = "toto";
             c1.Lastname = "tata";
+            c1.Money = 100;
             ClientUC.CurrentClient = c1;
+            
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    ClientUC.CurrentClient.Money += 1;
+                }
+            });
         }
     }
 }

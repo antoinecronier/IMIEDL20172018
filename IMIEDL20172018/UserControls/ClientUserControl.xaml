@@ -16,13 +16,13 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Viewbox Grid.Column="0">
-            <Label Name="lblLastname" Content="{Binding CurrentClient.Lastname}"/>
+            <TextBox Name="lblLastname" Text="{Binding CurrentClient.Lastname, Mode=TwoWay}"/>
         </Viewbox>
         <Viewbox Grid.Column="1">
-            <Label Name="lblFirstname" Content="{Binding CurrentClient.Firstname}"/>
+            <TextBox Name="lblFirstname" Text="{Binding CurrentClient.Firstname, Mode=TwoWay}"/>
         </Viewbox>
         <Viewbox Grid.Column="3">
-            <Label Name="lblMoney" Content="Money"/>
+            <Label Name="lblMoney" Content="{Binding CurrentClient.Money, Mode=TwoWay}"/>
         </Viewbox>
     </Grid>
 </UserControl>
