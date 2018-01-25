@@ -1,4 +1,5 @@
 ﻿using IMIEDL20172018.Models;
+using IMIEDL20172018.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,14 +30,20 @@ namespace IMIEDL20172018
             c1.Lastname = "tata";
             c1.Money = 100;
             ClientUC.CurrentClient = c1;
-            
+
             Task.Factory.StartNew(() =>
             {
-                while (true)
-                {
-                    ClientUC.CurrentClient.Money += 1;
-                }
+                Client client = new Client();
+                client.Firstname = "coucou";
+                ClientUC.CurrentClient = client;
             });
+
+            btnNavigate.Click += BtnNavigate_Click;
+        }
+
+        private void BtnNavigate_Click(object sender, RoutedEventArgs e)
+        {
+            this.Content = new Page1();
         }
     }
 }

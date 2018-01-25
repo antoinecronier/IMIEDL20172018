@@ -50,5 +50,7 @@
         </Viewbox>
 
         <uc:ClientUserControl x:Name="ClientUC" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="6"/>
+
+        <Button Name="btnNavigate" Content="Navigate" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
