@@ -1,4 +1,6 @@
-﻿using MySql.Data.Entity;
+﻿using Database.MySQL;
+using EntityUtils.Generator;
+using MySql.Data.Entity;
 using ProjectModel.Models;
 using System;
 using System.Collections.Generic;
@@ -19,12 +21,23 @@ namespace IMIEDL20172018
         public App()
         {
             DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
-        }
-
-        protected override void OnActivated(EventArgs e)
-        {
             new Database.MySQL.Test();
-            base.OnActivated(e);
+
+            Task.Factory.StartNew(() =>
+            {
+                EntityGenerator<Client> generatorC = new EntityGenerator<Client>();
+                EntityGenerator<Product> generatorP = new EntityGenerator<Product>();
+                MySQLManager<Client> manager = new MySQLManager<Client>();
+                for (int i = 0; i < 6000; i++)
+                {
+                    Client cli = generatorC.GenerateItem();
+                    for (int j = 0; j < 4; j++)
+                    {
+                        cli.Bag.Add(generatorP.GenerateItem());
+                    }
+                    manager.Insert(cli);
+                }
+            });
         }
     }
 }

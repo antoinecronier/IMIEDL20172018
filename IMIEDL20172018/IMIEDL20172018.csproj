@@ -159,6 +159,10 @@
       <Project>{de1ce39f-a00d-488f-884d-3dfb42167321}</Project>
       <Name>Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EntityUtils\EntityUtils.csproj">
+      <Project>{09d05a1c-417c-4ad8-890e-a0752713d0ac}</Project>
+      <Name>EntityUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProjectModel\ProjectModel.csproj">
       <Project>{c0f39411-0ec7-432b-b01d-13afa55e9084}</Project>
       <Name>ProjectModel</Name>

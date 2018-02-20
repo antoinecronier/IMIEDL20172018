@@ -32,6 +32,14 @@ namespace Database.MySQL
 
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Truck>();
+            modelBuilder.Entity<Client>();
+            modelBuilder.Entity<Product>();
+        }
+
         public DbSet<T> DbSetT { get; set; }
 
         public async Task<T> Insert(T item)

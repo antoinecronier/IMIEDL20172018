@@ -17,7 +17,8 @@ namespace Database.MySQL
             clientManager.Insert(client1);
             clientManager.Insert(client2);
 
-            MySQLManager<Product> productManager = new MySQLManager<Product>();
+            MySQLManager<Truck> productManager = new MySQLManager<Truck>();
+            productManager.Insert(new Truck());
         }
     }
 }
