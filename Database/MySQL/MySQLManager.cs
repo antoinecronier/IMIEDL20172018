@@ -1,6 +1,8 @@
-﻿using ProjectModel.Models;
+﻿using MySql.Data.Entity;
+using ProjectModel.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -13,12 +15,21 @@ using System.Threading.Tasks;
 
 namespace Database.MySQL
 {
-    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
-    class MySQLManager<T> : DbContext where T : ModelBase
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+    public class MySQLManager<T> : DbContext where T : ModelBase
     {
-        public MySQLManager() : base("Server=localhost;Port=3306;Database=imiedl20172018;Uid=root;Pwd=")
+        public MySQLManager(String connectionString = null) : 
+            base(connectionString == null ? 
+                "Server=localhost;Port=3306;Database=imiedl20172018;Uid=root;Pwd=" 
+                : connectionString)
         {
-            
+        }
+
+        // Constructor to use on a DbConnection that is already opened
+        public MySQLManager(DbConnection existingConnection, bool contextOwnsConnection)
+      : base(existingConnection, contextOwnsConnection)
+    {
+
         }
 
         public DbSet<T> DbSetT { get; set; }
