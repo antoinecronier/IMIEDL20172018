@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IMIEDL20172018.Views;
-using IMIEDL20172018.Models;
+using ProjectModel.Models;
 
 namespace IMIEDL20172018.ViewModels
 {

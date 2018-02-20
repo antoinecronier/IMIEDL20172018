@@ -1,7 +1,7 @@
 ﻿using System;
 using IMIEDL20172018.Views;
 using System.Collections.Generic;
-using IMIEDL20172018.Models;
+using ProjectModel.Models;
 
 namespace IMIEDL20172018.ViewModels
 {

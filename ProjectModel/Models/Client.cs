@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMIEDL20172018.Models
+namespace ProjectModel.Models
 {
     public class Client : INotifyPropertyChanged
     {
