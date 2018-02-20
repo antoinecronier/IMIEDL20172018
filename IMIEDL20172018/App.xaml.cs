@@ -13,5 +13,10 @@ namespace IMIEDL20172018
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnActivated(EventArgs e)
+        {
+            new Database.MySQL.Test();
+            base.OnActivated(e);
+        }
     }
 }

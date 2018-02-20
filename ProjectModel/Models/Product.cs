@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectModel.Models
 {
-    public class Product
+    public class Product : ModelBase
     {
         #region StaticVariables
         #endregion
