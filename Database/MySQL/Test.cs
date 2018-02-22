@@ -11,10 +11,15 @@ namespace Database.MySQL
     {
         public Test()
         {
+            Do();
+        }
+
+        public async void Do()
+        {
             MySQLManager<Client> clientManager = new MySQLManager<Client>();
             Client client1 = new Client("toto", "test", 12);
             Client client2 = new Client("tata", "test", 22);
-            clientManager.Insert(client1);
+            await clientManager.Insert(client1);
             clientManager.Insert(client2);
 
             MySQLManager<Truck> productManager = new MySQLManager<Truck>();
